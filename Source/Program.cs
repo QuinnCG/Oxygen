@@ -7,8 +7,11 @@ internal class Program
 {
 	private static void Main()
 	{
-		//CreateAndSave(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/MyAssembly.exe");
-		//Console.ReadKey(true);
+        //CreateAndSave(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/MyAssembly.exe");
+        //Console.ReadKey(true);
+
+        var app = new Application();
+        app.Run();
 	}
 
 	public static void CreateAndSave(string assemblyPath)
@@ -30,6 +33,4 @@ internal class Program
 
 		assembly.Save(assemblyPath);
 	}
-
-
 }
