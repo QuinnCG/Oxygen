@@ -1,4 +1,4 @@
-# Vertex
+// Vertex
 #version 330 core
 
 layout (location = 0) in vec2 a_position;
@@ -14,7 +14,7 @@ void main()
 
 
 
-# Fragment
+// Fragment
 #version 330 core
 
 in vec2 v_uv;
