@@ -23,14 +23,14 @@ public unsafe class Application
 
 		GL.LoadBindings(new GLFWBindingsContext());
 
-		var lastID = -1;
+		int lastID = -1;
 		GL.Enable(EnableCap.DebugOutput);
 		GL.DebugMessageCallback((source, type, id, severity, length, message, userParam) =>
 		{
 			if (id != lastID && (severity is not DebugSeverity.DebugSeverityNotification or DebugSeverity.DebugSeverityLow or DebugSeverity.DontCare))
 			{
 				lastID = id;
-				var msg = Encoding.Default.GetString((byte*)message, length);
+				string msg = Encoding.Default.GetString((byte*)message, length);
 				Console.WriteLine(msg);
 			}
 		}, 0);
@@ -42,12 +42,14 @@ public unsafe class Application
 			new Vertex() { Position = new Vector2(-0.5f, -0.5f), UV = new Vector2(0f, 0f) },
 			new Vertex() { Position = new Vector2(-0.5f,  0.5f), UV = new Vector2(0f, 1f) },
 			new Vertex() { Position = new Vector2( 0.5f,  0.5f), UV = new Vector2(1f, 1f) },
-			new Vertex() { Position = new Vector2( 0.5f, -0.5f), UV = new Vector2(1f, 0f) },
+			new Vertex() { Position = new Vector2( 0.5f, -0.5f), UV = new Vector2(1f, 0f) }
 		],
 		[
 			0, 1, 2,
 			3, 0, 2
 		]);
+
+		string source = File.ReadAllText("Resources/Default.glsl");
 
 		var shader = new Shader("""
 			#version 330 core

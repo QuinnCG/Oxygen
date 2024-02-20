@@ -40,11 +40,11 @@ internal class VertexArray
 
 	private static float[] GetVertexData(Vertex[] vertices)
 	{
-		var data = new float[Vertex.FloatCount * vertices.Length];
+		float[] data = new float[Vertex.FloatCount * vertices.Length];
 
-		for (var i = 0; i < vertices.Length; i++)
+		for (int i = 0; i < vertices.Length; i++)
 		{
-			var vertex = vertices[i];
+			Vertex vertex = vertices[i];
 
 			data[i + 0] = vertex.Position.X;
 			data[i + 1] = vertex.Position.Y;

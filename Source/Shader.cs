@@ -8,8 +8,8 @@ internal class Shader
 
     public Shader(string vertexSource, string fragmentSource)
     {
-        var vs = CreateShader(ShaderType.VertexShader, vertexSource);
-        var fs = CreateShader(ShaderType.FragmentShader, fragmentSource);
+		int vs = CreateShader(ShaderType.VertexShader, vertexSource);
+		int fs = CreateShader(ShaderType.FragmentShader, fragmentSource);
 
         Handle = GL.CreateProgram();
         GL.AttachShader(Handle, vs);
@@ -17,7 +17,7 @@ internal class Shader
         GL.LinkProgram(Handle);
         GL.ValidateProgram(Handle);
 
-        var info = GL.GetProgramInfoLog(Handle);
+		string info = GL.GetProgramInfoLog(Handle);
         if (!string.IsNullOrWhiteSpace(info))
         {
             Console.WriteLine(info);
@@ -34,11 +34,11 @@ internal class Shader
 
     private static int CreateShader(ShaderType type, string source)
     {
-        var handle = GL.CreateShader(type);
+		int handle = GL.CreateShader(type);
         GL.ShaderSource(handle, source);
         GL.CompileShader(handle);
 
-        var info = GL.GetShaderInfoLog(handle);
+		string info = GL.GetShaderInfoLog(handle);
         if (!string.IsNullOrEmpty(info))
         {
             Console.WriteLine(info);

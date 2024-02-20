@@ -10,5 +10,5 @@ internal struct Vertex
 	public Vector2 Position;
 	public Vector2 UV;
 
-    public override string ToString() => $"<{Position}, {UV}>";
+    public readonly override string ToString() => $"<{Position}, {UV}>";
 }
