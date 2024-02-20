@@ -10,4 +10,15 @@
 		<InvariantGlobalization>true</InvariantGlobalization>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <None Remove=".gitattributes" />
+	  <None Remove=".gitignore" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="OpenTK.Graphics" Version="4.8.2" />
+	  <PackageReference Include="OpenTK.Input" Version="4.8.2" />
+	  <PackageReference Include="OpenTK.Windowing.GraphicsLibraryFramework" Version="4.8.2" />
+	</ItemGroup>
+
 </Project>

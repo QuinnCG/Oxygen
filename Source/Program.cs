@@ -7,8 +7,8 @@ internal class Program
 {
 	private static void Main()
 	{
-		CreateAndSave(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/MyAssembly.exe");
-		Console.ReadKey(true);
+		//CreateAndSave(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/MyAssembly.exe");
+		//Console.ReadKey(true);
 	}
 
 	public static void CreateAndSave(string assemblyPath)
@@ -23,11 +23,13 @@ internal class Program
 		il.Emit(OpCodes.Ldarg_0);
 		il.Emit(OpCodes.Ldarg_1);
 		il.Emit(OpCodes.Add);
-		il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", [typeof(int)]));
+		//il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", [typeof(int)]));
 		il.Emit(OpCodes.Ret);
 
 		type.CreateType();
 
 		assembly.Save(assemblyPath);
 	}
+
+
 }
