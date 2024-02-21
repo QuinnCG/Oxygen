@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace Oxygen;
 
@@ -51,4 +52,14 @@ internal class Shader
     {
         GL.UseProgram(Handle);
     }
+
+	public void SetUniform(string name, Matrix4 matrix)
+	{
+		GL.UniformMatrix4(GetLocation(name), false, ref matrix);
+	}
+
+	private int GetLocation(string name)
+	{
+		return GL.GetUniformLocation(Handle, name);
+	}
 }
