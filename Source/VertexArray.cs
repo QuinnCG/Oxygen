@@ -44,13 +44,13 @@ internal class VertexArray
 
 		for (int i = 0; i < vertices.Length; i++)
 		{
-			Vertex vertex = vertices[i];
+			var vertex = vertices[i];
 
-			data[i + 0] = vertex.Position.X;
-			data[i + 1] = vertex.Position.Y;
+			data[(i * Vertex.FloatCount) + 0] = vertex.Position.X;
+			data[(i * Vertex.FloatCount) + 1] = vertex.Position.Y;
 
-			data[i + 2] = vertex.UV.X;
-			data[i + 3] = vertex.UV.Y;
+			data[(i * Vertex.FloatCount) + 2] = vertex.UV.X;
+			data[(i * Vertex.FloatCount) + 3] = vertex.UV.Y;
 		}
 
 		return data;
