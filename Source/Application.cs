@@ -37,6 +37,9 @@ public unsafe class Application
 
 		GL.FrontFace(FrontFaceDirection.Cw);
 
+		GL.Enable(EnableCap.Blend);
+		GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+
 		var vao = new VertexArray(
 		[
 			new Vertex() { Position = new Vector2(-0.5f, -0.5f), UV = new Vector2(0f, 0f) },
@@ -49,12 +52,13 @@ public unsafe class Application
 			3, 0, 2
 		]);
 
-		string source = File.ReadAllText("Resources/Default.glsl");
+		string source = Resource.LoadText("Default.glsl");
 		int splitIndex = source.IndexOf("// Fragment");
 		var vs = source[..splitIndex];
 		var fs = source[splitIndex..];
 
 		var shader = new Shader(vs, fs);
+		var texture = new Texture(Resource.LoadBytes("Logo.png"));
 
 		while (!GLFW.WindowShouldClose(_window))
 		{
@@ -63,6 +67,7 @@ public unsafe class Application
 
 			vao.Bind();
 			shader.Bind();
+			texture.Bind();
 
 			GL.DrawElements(PrimitiveType.Triangles, vao.IndexCount, DrawElementsType.UnsignedInt, 0);
 
