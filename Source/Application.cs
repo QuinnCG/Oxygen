@@ -7,7 +7,16 @@ namespace Oxygen;
 
 public unsafe class Application
 {
-	private Window* _window;
+	public static (int width, int height) WindowSize
+	{
+		get
+		{
+			GLFW.GetWindowSize(_window, out int width, out int height);
+			return (width, height);
+		}
+	}
+
+	public static Window* _window;
 
 	public void Run()
 	{
@@ -63,26 +72,7 @@ public unsafe class Application
 
 		while (!GLFW.WindowShouldClose(_window))
 		{
-			GL.ClearColor(0f, 0f, 0f, 1f);
-			GL.Clear(ClearBufferMask.ColorBufferBit);
-
-			vao.Bind();
-			shader.Bind();
-			texture.Bind();
-
-			var mvp = Matrix4.Identity;
-
-			mvp *= Matrix4.CreateRotationZ(MathF.PI / 180f * 60f);
-			mvp *= Matrix4.CreateScale(1.5f);
-			mvp *= Matrix4.CreateTranslation(1f, 1f, 0f);
-
-			float orthoScale = 2f;
-			GLFW.GetWindowSize(_window, out int width, out int height);
-			mvp *= Matrix4.CreateOrthographic((float)width / height * orthoScale, orthoScale, 0f, 1f);
-
-			shader.SetUniform("u_mvp", mvp);
-
-			GL.DrawElements(PrimitiveType.Triangles, vao.IndexCount, DrawElementsType.UnsignedInt, 0);
+			Renderer.Draw();
 
 			GLFW.SwapBuffers(_window);
 			GLFW.PollEvents();

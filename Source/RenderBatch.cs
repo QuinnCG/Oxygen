@@ -1,6 +1,9 @@
 ﻿namespace Oxygen;
 
-internal record RenderBatch
+internal struct RenderBatch
 {
+	public Shader Shader;
+	public Texture? Texture;
 
+	public RenderObject[] RenderObjects;
 }
