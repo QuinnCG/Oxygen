@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using OpenTK.Graphics.OpenGL4;
-using OpenTK.Mathematics;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace Oxygen;
@@ -15,6 +14,7 @@ public unsafe class Application
 			return (width, height);
 		}
 	}
+	public static float Time => (float)GLFW.GetTime();
 
 	public static Window* _window;
 
@@ -49,18 +49,6 @@ public unsafe class Application
 		GL.Enable(EnableCap.Blend);
 		GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
 
-		var vao = new VertexArray(
-		[
-			new Vertex() { Position = new Vector2(-0.5f, -0.5f), UV = new Vector2(0f, 0f) },
-			new Vertex() { Position = new Vector2(-0.5f,  0.5f), UV = new Vector2(0f, 1f) },
-			new Vertex() { Position = new Vector2( 0.5f,  0.5f), UV = new Vector2(1f, 1f) },
-			new Vertex() { Position = new Vector2( 0.5f, -0.5f), UV = new Vector2(1f, 0f) }
-		],
-		[
-			0, 1, 2,
-			3, 0, 2
-		]);
-
 		string source = Resource.LoadText("Default.glsl");
 		int splitIndex = source.IndexOf("// Fragment");
 
@@ -72,6 +60,7 @@ public unsafe class Application
 
 		while (!GLFW.WindowShouldClose(_window))
 		{
+			Renderer.Submit(new RenderObject(Shape.Quad, shader, texture));
 			Renderer.Draw();
 
 			GLFW.SwapBuffers(_window);
